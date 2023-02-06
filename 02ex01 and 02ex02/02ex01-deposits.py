@@ -42,27 +42,35 @@ USAGE = """USAGE: {script} initial_sum percent fixed_period set_period
 USAGE = USAGE.strip()
 
 
-def deposit(initial_sum, percent, fixed_period, set_period):
+def deposit(initial_sum, percent):
     """Calculate deposit yield."""
     per = percent / 100
-    growth = (1 + per) ** (set_period / fixed_period)
-    return initial_sum * growth
+    one_year = initial_sum * (1 + per)
+    one_month = one_year / 12
+    fife_year = (1 + per) ** 5 * initial_sum
+    ten_year = (1 + per) ** 10 * initial_sum
+    msg_0, msg_1 = 'net profit for', ', total amount:'
+    return \
+        f'\n{msg_0.title()} the month: {one_month:.2f}{msg_1} {one_month + initial_sum:.2f}\n' \
+        f'{msg_0.title()} the year: {one_year:.2f}{msg_1} {one_year + initial_sum:.2f}\n' \
+        f'{msg_0.title()} five years: {fife_year:.2f}{msg_1} {fife_year + initial_sum:.2f}\n' \
+        f'{msg_0.title()} five years: {ten_year:.2f}{msg_1} {ten_year + initial_sum:.2f}\n'
 
 
 def main(args):
     """Gets called when run as a script."""
-    if len(args) != 4 + 1:
+    if len(args) != 2 + 1:
         exit(USAGE.format(script=args[0]))
 
     args = args[1:]
-    initial_sum, percent, fixed_period, set_period = map(float, args)
+    initial_sum, percent = map(float, args)
 
     # same as
-    # initial_sum = float(args[0])
-    # percent = float(args[1])
+    #initial_sum = float(args[0])
+    #percent = float(args[1])
     # ...
 
-    res = deposit(initial_sum, percent, fixed_period, set_period)
+    res = deposit(initial_sum, percent)
     print(res)
 
 
