@@ -35,7 +35,7 @@ TOTAL = SUM * ((1 + p) ** (SET_PERIOD / FIXED_PERIOD))
 #       not known at the moment the script is run
 
 
-USAGE = """USAGE: {script} initial_sum percent fixed_period set_period
+USAGE = """USAGE: {script} initial_sum percent
 
 \tCalculate deposit yield. See script source for more details.
 """
